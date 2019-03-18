@@ -25,6 +25,30 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>1.24</version>
+    </dependency>
+    <dependency>
+      <groupId>de.jkeylockmanager</groupId>
+      <artifactId>jkeylockmanager</artifactId>
+      <version>2.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.26</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.26</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -71,5 +95,55 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>test/*</exclude>
+          <exclude>prod/*</exclude>
+          <exclude>dev/*</exclude>
+          <exclude>preprod/*</exclude>
+          <exclude>vanke/*</exclude>
+        </excludes>
+      </resource>
+      <resource>
+        <directory>src/main/resources/${profile.name}</directory>
+      </resource>
+    </resources>
   </build>
+  <profiles>
+    <profile>
+      <id>prod</id>
+      <properties>
+        <profile.name>prod</profile.name>
+      </properties>
+    </profile>
+    <profile>
+      <id>preprod</id>
+      <properties>
+        <profile.name>preprod</profile.name>
+      </properties>
+    </profile>
+    <profile>
+      <id>test</id>
+      <properties>
+        <profile.name>test</profile.name>
+      </properties>
+    </profile>
+    <profile>
+      <id>dev</id>
+      <properties>
+        <profile.name>dev</profile.name>
+      </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+    <profile>
+      <id>vanke</id>
+      <properties>
+        <profile.name>vanke</profile.name>
+      </properties>
+    </profile>
+  </profiles>
 </project>
